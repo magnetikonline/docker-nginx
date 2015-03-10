@@ -1,0 +1,36 @@
+types {
+	application/font-woff			woff;
+	application/javascript			js;
+	application/json				json;
+	application/pdf					pdf;
+	application/rss+xml				rss;
+	application/vnd.ms-fontobject	eot;
+	application/x-font-ttf			ttf;
+	application/x-shockwave-flash	swf;
+	application/zip					zip;
+
+	audio/mpeg						mp3;
+	audio/ogg						ogg;
+	audio/x-m4a						m4a;
+
+	image/gif						gif;
+	image/jpeg						jpg jpeg;
+	image/png						png;
+	image/svg+xml					svg svgz;
+	image/tiff						tif tiff;
+	image/webp						webp;
+	image/x-icon					ico;
+
+	text/css						css;
+	text/html						html htm;
+	text/mathml						mml;
+	text/plain						txt;
+	text/xml						xml;
+
+	video/mp4						mp4;
+	video/mpeg						mpg mpeg;
+	video/quicktime					mov;
+	video/webm						webm;
+	video/x-flv						flv;
+	video/x-m4v						m4v;
+}
