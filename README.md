@@ -25,4 +25,4 @@ $ ./run.sh \
 	/path/to/logs
 ```
 
-Usable Nginx configuration example located under [nginx.conf/](nginx.conf).
+Usable Nginx configuration example located under [resource/conf](resource/conf).
