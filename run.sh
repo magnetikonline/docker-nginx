@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 DOCKER_IMAGE_NAME="magnetikonline/nginx"
 NGINX_CONF_DIR="/etc/nginx"
@@ -13,7 +13,7 @@ fi
 
 if [[ -z $3 ]]; then
 	# run Nginx without logs to host
-	sudo docker run -d \
+	docker run -d \
 		-p 8080:80 \
 		-p 8443:443 \
 		-v $(readlink -f $1):$NGINX_CONF_DIR \
@@ -28,7 +28,7 @@ else
 	fi
 
 	# run Nginx with logs passed to host
-	sudo docker run -d \
+	docker run -d \
 		-p 8080:80 \
 		-p 8443:443 \
 		-v $(readlink -f $1):$NGINX_CONF_DIR \
@@ -38,4 +38,5 @@ else
 		$DOCKER_IMAGE_NAME
 fi
 
+# success
 exit 0
