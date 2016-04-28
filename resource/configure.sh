@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 ./configure \
 	--conf-path=/etc/nginx/nginx.conf \
