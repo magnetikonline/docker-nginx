@@ -14,7 +14,7 @@ function exitError {
 
 function getPathCanonical {
 
-	readlink -en "$1" || true
+	readlink -en "$1" || :
 }
 
 function usage {
@@ -22,9 +22,9 @@ function usage {
 	cat <<EOM
 Usage: $(basename "$0") [OPTION]...
 
-  -c DIR    path to Nginx config mounted inside container at $NGINX_CONF_DIR
+  -c DIR    path to nginx config mounted inside container at $NGINX_CONF_DIR
   -d DIR    document root mounted at $NGINX_DOCUMENT_ROOT_DIR
-  -l DIR    optional path for Nginx logs back to host, mounted at $NGINX_LOG_DIR
+  -l DIR    optional path for nginx logs back to host, mounted at $NGINX_LOG_DIR
   -h        display help
 EOM
 
@@ -54,11 +54,11 @@ done
 
 # verify paths
 if [[ -z $hostNginxConfDir ]]; then
-	exitError "No host path to Nginx config given"
+	exitError "No host path to nginx config given"
 fi
 
 if [[ ! -d $hostNginxConfDir ]]; then
-	exitError "Invalid host path to Nginx config of [$hostNginxConfDir]"
+	exitError "Invalid host path to nginx config of [$hostNginxConfDir]"
 fi
 
 if [[ ! -f "$hostNginxConfDir/nginx.conf" ]]; then
@@ -66,41 +66,27 @@ if [[ ! -f "$hostNginxConfDir/nginx.conf" ]]; then
 fi
 
 if [[ -z $hostNginxDocumentRootDir ]]; then
-	exitError "No path to Nginx document root given"
+	exitError "No path to nginx document root given"
 fi
 
 if [[ ! -d $hostNginxDocumentRootDir ]]; then
-	exitError "Invalid Nginx document root of [$hostNginxDocumentRootDir]"
+	exitError "Invalid nginx document root of [$hostNginxDocumentRootDir]"
 fi
 
 if [[ (-n $hostNginxLogDir) && (! -d $hostNginxLogDir) ]]; then
-	exitError "Invalid host path for Nginx log files of [$hostNginxLogDir]"
+	exitError "Invalid host path for nginx log files of [$hostNginxLogDir]"
 fi
 
-# run Nginx Docker image
-if [[ -z $hostNginxLogDir ]]; then
-	# without mapping logs to host
-	docker run \
-		--detach \
-		--publish 8080:80 \
-		--publish 8443:443 \
-		--volume "$(getPathCanonical "$hostNginxConfDir"):$NGINX_CONF_DIR" \
-		--volume "$(getPathCanonical "$hostNginxDocumentRootDir"):$NGINX_DOCUMENT_ROOT_DIR" \
-		--workdir "$NGINX_DOCUMENT_ROOT_DIR" \
-		$DOCKER_IMAGE_NAME
-
-else
-	# Nginx logs mapped back to host
-	docker run \
-		--detach \
-		--publish 8080:80 \
-		--publish 8443:443 \
-		--volume "$(getPathCanonical "$hostNginxConfDir"):$NGINX_CONF_DIR" \
-		--volume "$(getPathCanonical "$hostNginxDocumentRootDir"):$NGINX_DOCUMENT_ROOT_DIR" \
-		--volume "$(getPathCanonical "$hostNginxLogDir"):$NGINX_LOG_DIR" \
-		--workdir "$NGINX_DOCUMENT_ROOT_DIR" \
-		$DOCKER_IMAGE_NAME
-fi
+# run nginx Docker image
+docker run \
+	--detach \
+	--publish 8080:80 \
+	--publish 8443:443 \
+	--volume "$(getPathCanonical "$hostNginxConfDir"):$NGINX_CONF_DIR" \
+	--volume "$(getPathCanonical "$hostNginxDocumentRootDir"):$NGINX_DOCUMENT_ROOT_DIR" \
+	${hostNginxLogDir:+--volume "$(getPathCanonical "$hostNginxLogDir"):$NGINX_LOG_DIR"} \
+	--workdir "$NGINX_DOCUMENT_ROOT_DIR" \
+	$DOCKER_IMAGE_NAME
 
 # success
 exit 0
