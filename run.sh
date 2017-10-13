@@ -87,6 +87,3 @@ docker run \
 	${hostNginxLogDir:+--volume "$(getPathCanonical "$hostNginxLogDir"):$NGINX_LOG_DIR"} \
 	--workdir "$NGINX_DOCUMENT_ROOT_DIR" \
 	$DOCKER_IMAGE_NAME
-
-# success
-exit 0
