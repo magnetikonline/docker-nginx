@@ -14,7 +14,7 @@ function exitError {
 
 function getPathCanonical {
 
-	readlink -en "$1" || :
+	readlink --canonicalize-existing --no-newline "$1" || :
 }
 
 function usage {
