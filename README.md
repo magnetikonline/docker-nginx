@@ -1,7 +1,7 @@
-# Docker nginx
+# Docker Nginx
 `Dockerfile` using Ubuntu 16.04 as base which provides:
-- [nginx 1.12.2](https://nginx.org/en/CHANGES-1.12) (compiled from source).
-- Host file system served nginx config.
+- [Nginx 1.14.0](https://nginx.org/en/CHANGES-1.14) (compiled from source).
+- Host file system served Nginx config.
 - Logging within container at `/var/log/nginx` (optionally passed back to host).
 - Document root from host file system mounted within container at `/srv/http`.
 - Ports `80` (HTTP) and `443` (HTTPS) exposed to host at `8080` / `8443` respectively.
@@ -23,17 +23,17 @@ Then to run:
 
 ```sh
 $ ./run.sh \
-	-c "/path/to/nginx.conf" \
-	-d "/path/to/docroot"
+	-c /path/to/nginx.conf \
+	-d /path/to/docroot
 ```
 
-To pass nginx logs back to host:
+To pass Nginx logs back to host:
 
 ```sh
 $ ./run.sh \
-	-c "/path/to/nginx.conf" \
-	-d "/path/to/docroot" \
-	-l "/path/to/logs"
+	-c /path/to/nginx.conf \
+	-d /path/to/docroot \
+	-l /path/to/logs
 ```
 
-An nginx configuration example located under [resource/conf](resource/conf).
+An Nginx configuration example located under [resource/conf](resource/conf).
