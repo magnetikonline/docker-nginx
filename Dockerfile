@@ -22,4 +22,4 @@ VOLUME ["/etc/nginx","/srv/http","/var/log/nginx"]
 
 EXPOSE 80 443
 
-CMD ["/usr/local/sbin/nginx"]
+CMD ["/usr/local/sbin/nginx","-g","daemon off;lock_file /run/lock/nginx.lock;"]
