@@ -1,10 +1,10 @@
 # Docker Nginx
-`Dockerfile` using Ubuntu 16.04 as base which provides:
+`Dockerfile` using Ubuntu 18.04 as base which provides:
 - [Nginx 1.14.0](https://nginx.org/en/CHANGES-1.14) (compiled from source).
-- Host file system served Nginx config.
-- Logging within container at `/var/log/nginx` (optionally passed back to host).
+- Nginx configuration passed in from host file system.
+- Logging within container at `/var/log/nginx` (optionally passed to host).
 - Document root from host file system mounted within container at `/srv/http`.
-- Ports `80` (HTTP) and `443` (HTTPS) exposed to host at `8080` / `8443` respectively.
+- Ports `80` (HTTP) and `443` (HTTPS) exposed at `8080` and `8443` respectively.
 
 ## Usage
 To build Docker image:
