@@ -16,7 +16,7 @@ $ ./build.sh
 Alternatively pull the image from Docker Hub:
 
 ```sh
-$ docker pull magnetikonline/nginx
+$ docker pull magnetikonline/docker-nginx
 ```
 
 Then to run:
@@ -27,7 +27,7 @@ $ ./run.sh \
 	-d /path/to/docroot
 ```
 
-To pass Nginx logs back to host:
+Or to additionally pass Nginx logs back to host:
 
 ```sh
 $ ./run.sh \
