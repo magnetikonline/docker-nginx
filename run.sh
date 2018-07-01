@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-DOCKER_IMAGE_NAME="magnetikonline/docker-nginx"
+DOCKER_IMAGE_NAME="magnetikonline/nginx"
 NGINX_CONF_DIR="/etc/nginx"
 NGINX_DOCUMENT_ROOT_DIR="/srv/http"
 NGINX_LOG_DIR="/var/log/nginx"

@@ -16,7 +16,7 @@ $ ./build.sh
 Alternatively pull the image from Docker Hub:
 
 ```sh
-$ docker pull magnetikonline/docker-nginx
+$ docker pull magnetikonline/nginx
 ```
 
 Then to run:
