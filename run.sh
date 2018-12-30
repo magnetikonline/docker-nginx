@@ -7,18 +7,15 @@ NGINX_LOG_DIR="/var/log/nginx"
 
 
 function exitError {
-
 	echo "Error: $1" >&2
 	exit 1
 }
 
 function getPathCanonical {
-
 	readlink --canonicalize-existing --no-newline "$1" || :
 }
 
 function usage {
-
 	cat <<EOM
 Usage: $(basename "$0") [OPTION]...
 
