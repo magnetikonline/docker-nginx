@@ -74,7 +74,7 @@ if [[ (-n $hostNginxLogDir) && (! -d $hostNginxLogDir) ]]; then
 	exitError "invalid host path for log files of [$hostNginxLogDir]"
 fi
 
-# run Docker image
+# run image
 docker run \
 	--detach \
 	--publish 8080:80 \

@@ -1,6 +1,6 @@
 # Docker Nginx
 `Dockerfile` using Ubuntu 18.04 as base which provides:
-- [Nginx 1.14.0](https://nginx.org/en/CHANGES-1.14) (compiled from source).
+- [Nginx 1.14.2](https://nginx.org/en/CHANGES-1.14) (compiled from source).
 - Nginx configuration passed in from host file system.
 - Logging within container at `/var/log/nginx` (optionally passed to host).
 - Document root from host file system mounted within container at `/srv/http`.
