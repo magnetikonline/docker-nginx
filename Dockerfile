@@ -1,6 +1,6 @@
 FROM ubuntu:18.04 AS build
 
-ENV VERSION "1.14.2"
+ENV VERSION "1.16.0"
 
 RUN apt-get update && apt-get upgrade --yes && \
 	apt-get install --yes gcc libpcre3-dev make zlib1g-dev && \
