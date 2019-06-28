@@ -1,5 +1,4 @@
 types {
-	application/font-woff			woff;
 	application/javascript			js;
 	application/json				json;
 	application/pdf					pdf;
@@ -12,6 +11,9 @@ types {
 	audio/mpeg						mp3;
 	audio/ogg						ogg;
 	audio/x-m4a						m4a;
+
+	font/woff						woff;
+	font/woff2						woff2;
 
 	image/gif						gif;
 	image/jpeg						jpg jpeg;
