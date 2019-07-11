@@ -3,8 +3,7 @@ FROM ubuntu:18.04 AS build
 ENV VERSION "1.16.0"
 
 RUN apt-get update && apt-get upgrade --yes && \
-	apt-get install --yes gcc libpcre3-dev make zlib1g-dev && \
-	apt-get clean
+	apt-get install --yes gcc libpcre3-dev make zlib1g-dev
 
 ADD "https://nginx.org/download/nginx-$VERSION.tar.gz" /root/build/
 RUN tar \
