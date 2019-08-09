@@ -76,6 +76,7 @@ docker run \
 	--detach \
 	--publish 8080:80 \
 	--publish 8443:443 \
+	--rm \
 	--volume "$(getPathCanonical "$hostNginxConfDir"):$NGINX_CONF_DIR" \
 	--volume "$(getPathCanonical "$hostNginxDocumentRootDir"):$NGINX_DOCUMENT_ROOT_DIR" \
 	${hostNginxLogDir:+--volume "$(getPathCanonical "$hostNginxLogDir"):$NGINX_LOG_DIR"} \
