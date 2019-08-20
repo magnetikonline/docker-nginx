@@ -26,6 +26,7 @@ COPY --from=build /usr/local/sbin/nginx /usr/local/sbin/nginx
 RUN mkdir /usr/local/nginx
 VOLUME ["/etc/nginx","/srv/http","/var/log/nginx"]
 
-EXPOSE 80 443
+EXPOSE 80/tcp 443/tcp
 
-CMD ["/usr/local/sbin/nginx","-g","daemon off;lock_file /run/lock/nginx.lock;"]
+ENTRYPOINT ["/usr/local/sbin/nginx"]
+CMD ["-g","daemon off;lock_file /run/lock/nginx.lock;"]

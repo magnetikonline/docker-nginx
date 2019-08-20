@@ -74,8 +74,8 @@ fi
 # run image
 docker run \
 	--detach \
-	--publish 8080:80 \
-	--publish 8443:443 \
+	--publish 8080:80/tcp \
+	--publish 8443:443/tcp \
 	--rm \
 	--volume "$(getPathCanonical "$hostNginxConfDir"):$NGINX_CONF_DIR" \
 	--volume "$(getPathCanonical "$hostNginxDocumentRootDir"):$NGINX_DOCUMENT_ROOT_DIR" \
