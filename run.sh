@@ -1,10 +1,13 @@
 #!/bin/bash -e
 
-DOCKER_IMAGE_NAME="magnetikonline/nginx"
+DIRNAME=$(dirname "$0")
+DOCKER_REPOSITORY="magnetikonline/nginx"
 NGINX_CONF_DIR="/etc/nginx"
 NGINX_DOCUMENT_ROOT_DIR="/srv/http"
 NGINX_LOG_DIR="/var/log/nginx"
 
+
+. "$DIRNAME/version"
 
 function exitError {
 	echo "Error: $1" >&2
@@ -81,4 +84,4 @@ docker run \
 	--volume "$(getPathCanonical "$hostNginxDocumentRootDir"):$NGINX_DOCUMENT_ROOT_DIR" \
 	${hostNginxLogDir:+--volume "$(getPathCanonical "$hostNginxLogDir"):$NGINX_LOG_DIR"} \
 	--workdir "$NGINX_DOCUMENT_ROOT_DIR" \
-		"$DOCKER_IMAGE_NAME"
+		"$DOCKER_REPOSITORY:$NGINX_VERSION"

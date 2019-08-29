@@ -1,9 +1,12 @@
 #!/bin/bash -e
 
 DIRNAME=$(dirname "$0")
-DOCKER_IMAGE_NAME="magnetikonline/nginx"
+DOCKER_REPOSITORY="magnetikonline/nginx"
 
+
+. "$DIRNAME/version"
 
 docker build \
-	--tag "$DOCKER_IMAGE_NAME" \
+	--build-arg "NGINX_VERSION=$NGINX_VERSION" \
+	--tag "$DOCKER_REPOSITORY:$NGINX_VERSION" \
 	"$DIRNAME"

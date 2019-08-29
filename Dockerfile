@@ -1,17 +1,17 @@
 FROM ubuntu:18.04 AS build
 
-ENV VERSION "1.16.0"
+ARG NGINX_VERSION
 
 RUN apt-get update && apt-get upgrade --yes && \
 	apt-get install --yes gcc libpcre3-dev make zlib1g-dev
 
-ADD "https://nginx.org/download/nginx-$VERSION.tar.gz" /root/build/
+ADD "https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz" /root/build/
 RUN tar \
 	--directory /root/build \
 	--extract \
-	--file "/root/build/nginx-$VERSION.tar.gz"
+	--file "/root/build/nginx-$NGINX_VERSION.tar.gz"
 
-WORKDIR "/root/build/nginx-$VERSION"
+WORKDIR "/root/build/nginx-$NGINX_VERSION"
 ADD ./resource/configure.sh .
 
 RUN chmod u+x configure.sh
