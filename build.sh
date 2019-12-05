@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 DIRNAME=$(dirname "$0")
-DOCKER_REPOSITORY="magnetikonline/nginx"
+DOCKER_REPOSITORY=${DOCKER_REPOSITORY-"magnetikonline/nginx"}
 
 
 . "$DIRNAME/version"
