@@ -9,4 +9,4 @@ DOCKER_REPOSITORY=${DOCKER_REPOSITORY-"magnetikonline/nginx"}
 docker build \
 	--build-arg "NGINX_VERSION=$NGINX_VERSION" \
 	--tag "$DOCKER_REPOSITORY:$NGINX_VERSION" \
-	"$DIRNAME"
+		"$DIRNAME"

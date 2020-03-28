@@ -2,8 +2,10 @@ FROM ubuntu:18.04 AS build
 
 ARG NGINX_VERSION
 
-RUN apt-get update && apt-get upgrade --yes && \
-	apt-get install --yes gcc libpcre3-dev make zlib1g-dev
+RUN DEBIAN_FRONTEND="noninteractive" \
+	apt-get update && \
+	apt-get install --no-install-recommends --yes \
+		gcc libpcre3-dev make zlib1g-dev
 
 ADD "https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz" /root/build/
 RUN tar \
