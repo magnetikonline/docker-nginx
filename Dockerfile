@@ -4,8 +4,11 @@ ARG NGINX_VERSION
 
 RUN DEBIAN_FRONTEND="noninteractive" \
 	apt-get update && \
-	apt-get install --no-install-recommends --yes \
-		gcc libpcre3-dev make zlib1g-dev
+	apt-get --no-install-recommends --yes install \
+		gcc \
+		libpcre3-dev \
+		make \
+		zlib1g-dev
 
 ADD "https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz" /root/build/
 RUN tar \
