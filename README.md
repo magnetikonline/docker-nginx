@@ -1,19 +1,21 @@
 # Docker Nginx
+
 `Dockerfile` using Ubuntu 18.04 as base which provides:
-- [Nginx 1.16.1](https://nginx.org/en/CHANGES-1.16) (compiled from source).
+- [Nginx 1.18.0](https://nginx.org/en/CHANGES-1.18) (compiled from source).
 - Nginx configuration passed in from host file system.
 - Logging within container at `/var/log/nginx` (optionally passed to host).
 - Document root from host file system mounted within container at `/srv/http`.
 - Ports `80` (HTTP) and `443` (HTTPS) exposed at `8080` and `8443` respectively.
 
 ## Usage
+
 To build Docker image:
 
 ```sh
 $ ./build.sh
 ```
 
-Alternatively pull the image from Docker Hub:
+Alternatively pull the image direct from Docker Hub:
 
 ```sh
 $ docker pull magnetikonline/nginx
