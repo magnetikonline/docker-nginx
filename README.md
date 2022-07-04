@@ -25,17 +25,17 @@ Then to run:
 
 ```sh
 $ ./run.sh \
-	-c /path/to/nginx.conf \
-	-d /path/to/docroot
+  -c /path/to/nginx.conf \
+  -d /path/to/docroot
 ```
 
 Or to additionally pass Nginx logs back to host:
 
 ```sh
 $ ./run.sh \
-	-c /path/to/nginx.conf \
-	-d /path/to/docroot \
-	-l /path/to/logs
+  -c /path/to/nginx.conf \
+  -d /path/to/docroot \
+  -l /path/to/logs
 ```
 
-An Nginx configuration example located under [resource/conf](resource/conf).
+An Nginx configuration example located under [`resource/conf`](resource/conf).
