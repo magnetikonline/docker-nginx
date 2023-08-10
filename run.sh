@@ -31,57 +31,67 @@ EOM
 	exit 2
 }
 
-# read arguments
-while getopts ":c:d:l:h" optKey; do
-	case "$optKey" in
-		c)
-			hostNginxConfDir=$OPTARG
-			;;
-		d)
-			hostNginxDocumentRootDir=$OPTARG
-			;;
-		l)
-			hostNginxLogDir=$OPTARG
-			;;
-		h|*)
-			usage
-			;;
-	esac
-done
+function main {
+	# read arguments
+	local hostNginxConfDir
+	local hostNginxDocumentRootDir
+	local hostNginxLogDir
 
-# verify paths
-if [[ -z $hostNginxConfDir ]]; then
-	exitError "no host path to Nginx config given"
-fi
+	local optKey
+	while getopts ":c:d:l:h" optKey; do
+		case "$optKey" in
+			c)
+				hostNginxConfDir=$OPTARG
+				;;
+			d)
+				hostNginxDocumentRootDir=$OPTARG
+				;;
+			l)
+				hostNginxLogDir=$OPTARG
+				;;
+			h|*)
+				usage
+				;;
+		esac
+	done
 
-if [[ ! -d $hostNginxConfDir ]]; then
-	exitError "invalid host path to Nginx config of [$hostNginxConfDir]"
-fi
+	# verify paths
+	if [[ -z $hostNginxConfDir ]]; then
+		exitError "no host path to Nginx config given"
+	fi
 
-if [[ ! -f "$hostNginxConfDir/nginx.conf" ]]; then
-	exitError "unable to locate nginx.conf at [$hostNginxConfDir/nginx.conf]"
-fi
+	if [[ ! -d $hostNginxConfDir ]]; then
+		exitError "invalid host path to Nginx config of [$hostNginxConfDir]"
+	fi
 
-if [[ -z $hostNginxDocumentRootDir ]]; then
-	exitError "no path to document root given"
-fi
+	if [[ ! -f "$hostNginxConfDir/nginx.conf" ]]; then
+		exitError "unable to locate nginx.conf at [$hostNginxConfDir/nginx.conf]"
+	fi
 
-if [[ ! -d $hostNginxDocumentRootDir ]]; then
-	exitError "invalid document root of [$hostNginxDocumentRootDir]"
-fi
+	if [[ -z $hostNginxDocumentRootDir ]]; then
+		exitError "no path to document root given"
+	fi
 
-if [[ (-n $hostNginxLogDir) && (! -d $hostNginxLogDir) ]]; then
-	exitError "invalid host path for log files of [$hostNginxLogDir]"
-fi
+	if [[ ! -d $hostNginxDocumentRootDir ]]; then
+		exitError "invalid document root of [$hostNginxDocumentRootDir]"
+	fi
 
-# run image
-docker run \
-	--detach \
-	--publish 8080:80/tcp \
-	--publish 8443:443/tcp \
-	--rm \
-	--volume "$(getPathCanonical "$hostNginxConfDir"):$NGINX_CONF_DIR" \
-	--volume "$(getPathCanonical "$hostNginxDocumentRootDir"):$NGINX_DOCUMENT_ROOT_DIR" \
-	${hostNginxLogDir:+--volume "$(getPathCanonical "$hostNginxLogDir"):$NGINX_LOG_DIR"} \
-	--workdir "$NGINX_DOCUMENT_ROOT_DIR" \
-		"$DOCKER_REPOSITORY:$NGINX_VERSION"
+	if [[ (-n $hostNginxLogDir) && (! -d $hostNginxLogDir) ]]; then
+		exitError "invalid host path for log files of [$hostNginxLogDir]"
+	fi
+
+	# run image
+	docker run \
+		--detach \
+		--publish 8080:80/tcp \
+		--publish 8443:443/tcp \
+		--rm \
+		--volume "$(getPathCanonical "$hostNginxConfDir"):$NGINX_CONF_DIR" \
+		--volume "$(getPathCanonical "$hostNginxDocumentRootDir"):$NGINX_DOCUMENT_ROOT_DIR" \
+		${hostNginxLogDir:+--volume "$(getPathCanonical "$hostNginxLogDir"):$NGINX_LOG_DIR"} \
+		--workdir "$NGINX_DOCUMENT_ROOT_DIR" \
+			"$DOCKER_REPOSITORY:$NGINX_VERSION"
+}
+
+
+main "$@"
