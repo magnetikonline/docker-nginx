@@ -17,7 +17,7 @@ RUN tar \
 	--file "/root/build/nginx-$NGINX_VERSION.tar.gz"
 
 WORKDIR "/root/build/nginx-$NGINX_VERSION"
-ADD ./resource/configure.sh .
+COPY ./resource/configure.sh .
 
 RUN chmod u+x configure.sh
 RUN ./configure.sh && \
