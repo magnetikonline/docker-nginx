@@ -33,9 +33,9 @@ EOM
 
 function main {
 	# read arguments
-	local hostNginxConfDir
-	local hostNginxDocumentRootDir
-	local hostNginxLogDir
+	local hostNginxConfDir=
+	local hostNginxDocumentRootDir=
+	local hostNginxLogDir=
 
 	local optKey
 	while getopts ":c:d:l:h" optKey; do
