@@ -19,16 +19,16 @@ function getPathCanonical {
 }
 
 function usage {
-	cat <<EOM
+	cat <<EOF >&2
 Usage: $(basename "$0") [OPTION]...
 
-  -c DIR    path to Nginx config mounted at $NGINX_CONF_DIR
-  -d DIR    document root mounted at $NGINX_DOCUMENT_ROOT_DIR
-  -l DIR    optional path for Nginx logs back to host, mounted at $NGINX_LOG_DIR
-  -h        display help
-EOM
+  -c DIR  path to Nginx config mounted at $NGINX_CONF_DIR
+  -d DIR  document root mounted at $NGINX_DOCUMENT_ROOT_DIR
+  -l DIR  optional path for Nginx logs back to host, mounted at $NGINX_LOG_DIR
+  -h      display help
+EOF
 
-	exit 2
+	exit 1
 }
 
 function main {
@@ -38,8 +38,8 @@ function main {
 	local hostNginxLogDir=
 
 	local optKey
-	while getopts ":c:d:l:h" optKey; do
-		case "$optKey" in
+	while getopts :c:d:l:h optKey; do
+		case $optKey in
 			c)
 				hostNginxConfDir=$OPTARG
 				;;
